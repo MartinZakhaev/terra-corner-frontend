@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { StreamChat } from "stream-chat";
 import { Chat } from "stream-chat-react";
 import Cookies from "universal-cookie";
+import { Toaster } from "react-hot-toast";
 import { ChannelListContainer, ChannelContainer, Auth } from "./components";
-import "stream-chat-react/dist/css/index.css";
+import "stream-chat-react/dist/css/v2/index.css";
 import "./App.css";
 
 const cookies = new Cookies();
@@ -31,26 +32,32 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  if (!authToken) return <Auth />;
+  // if (!authToken) return <Auth />;
 
   return (
-    <div className="app__wrapper">
-      <Chat client={client} theme="team dark">
-        <ChannelListContainer
-          isCreating={isCreating}
-          setIsCreating={setIsCreating}
-          setCreateType={setCreateType}
-          setIsEditing={setIsEditing}
-        />
-        <ChannelContainer
-          isCreating={isCreating}
-          setIsCreating={setIsCreating}
-          isEditing={isEditing}
-          setIsEditing={setIsEditing}
-          createType={createType}
-        />
-      </Chat>
-    </div>
+    <>
+      {authToken ? (
+        <div className="app__wrapper">
+          <Chat client={client} theme="team dark">
+            <ChannelListContainer
+              isCreating={isCreating}
+              setIsCreating={setIsCreating}
+              setCreateType={setCreateType}
+              setIsEditing={setIsEditing}
+            />
+            <ChannelContainer
+              isCreating={isCreating}
+              setIsCreating={setIsCreating}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              createType={createType}
+            />
+          </Chat>
+        </div>
+      ) : (
+        <Auth />
+      )}
+    </>
   );
 };
 

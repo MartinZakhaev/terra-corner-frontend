@@ -1,6 +1,10 @@
 :root {
-  --primary-color: #005fff;
+  --primary-color: rgb(79, 26, 211);
   --primary-color-alpha: #005fff1a;
+}
+
+.str-chat {
+  --str-chat__channel-list-background-color: transparent;
 }
 
 html,
@@ -18,6 +22,69 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: row;
+}
+
+.auth__form-outer-container {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.auth__form-center-container {
+  display: flex;
+  width: 85%;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth__form-left-div,
+.auth__form-right-div {
+  flex: 1;
+  padding: 20px;
+}
+
+.auth__form-left-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth__form-left-div-input-container {
+  width: 100%;
+  max-width: 421px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.auth__form-header,
+.auth__form-subheader {
+  margin: 0.3rem;
+}
+
+.auth__form-left-div-input-container input {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.auth__form-right-div {
+  background-color: #4e1ad3;
+}
+
+.auth__form-input-content {
+  width: 100%;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
 }
 
 .auth__form-container_fields {
@@ -62,10 +129,22 @@ body {
 
 .auth__form-container_fields-content_input {
   display: flex;
-  flex-direction: column;
   position: relative;
-
   margin: 1rem 0rem;
+}
+
+.auth__form-container_fields-content_input .icon {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.35rem;
+  padding: 9px 8px;
+  color: #aaa;
+  transition: 0.3s;
+}
+
+.auth__form-container_fields-content_input input:focus + .icon {
+  color: var(--primary-color);
+  transition: 0.3s;
 }
 
 .auth__form-container_fields-content_input label {
@@ -78,13 +157,13 @@ body {
 }
 
 .auth__form-container_fields-content_input input {
-  padding: 0.55rem 0.4rem;
+  padding: 0.55rem 2rem;
   border: 1px solid rgb(184, 196, 194);
   border-radius: 4px;
   font-size: 14px;
   outline: none;
   transition: all 150ms ease-in-out 0s;
-  width: 85%;
+  width: 100%;
   background: #fff;
 }
 
@@ -101,8 +180,8 @@ body {
 
 .auth__form-container_fields-content_input input:focus,
 .auth__form-container_fields-content_input input:active {
-  box-shadow: 0px 0px 0px 1.5px #005fff;
-  border-color: #005fff;
+  box-shadow: 0px 0px 0px 1.5px var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .auth__form-container_fields-content_input-password {
@@ -119,9 +198,10 @@ body {
 }
 
 .auth__form-container_fields-content_button button {
+  margin: 0.3rem;
   border-radius: 4px;
-  background: #005fff;
-  border: 1px solid #005fff;
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
@@ -129,17 +209,19 @@ body {
   outline: none;
   cursor: pointer;
   transition: 0.3s ease;
+  width: 100%;
 }
 
 .auth__form-container_fields-content_button button:hover {
-  background: #0066ff;
+  /* background: var(--primary-color); */
+  filter: brightness(120%);
 }
 
 .auth__form-container_fields-account {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
+  margin: 0.3rem;
   margin-top: 0.2rem;
 }
 
@@ -150,9 +232,13 @@ body {
 }
 
 .auth__form-container_fields-account span {
-  color: #05245a;
+  color: #000;
   cursor: pointer;
   font-weight: 700;
+}
+
+.auth__form-container_fields-account span:hover {
+  color: var(--primary-color);
 }
 
 @media screen and (max-width: 800px) {
@@ -181,7 +267,7 @@ body {
   }
 
   .auth__form-container_fields-content_input input {
-    width: 95%;
+    width: 100%;
   }
 
   .auth__form-container_fields-content_input-password {
@@ -701,6 +787,10 @@ body {
   margin: 20px;
 }
 
+.user-list__column--invite {
+  flex: 1 1;
+}
+
 .user-item__wrapper {
   display: flex;
   align-items: center;
@@ -967,6 +1057,10 @@ body {
   height: 16px;
   color: rgba(255, 255, 255, 0.66);
   margin-bottom: 10px;
+}
+
+.channel-preview {
+  background: transparent;
 }
 
 .channel-preview__wrapper {

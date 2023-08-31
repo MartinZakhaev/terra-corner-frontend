@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
-import signinImage from "../assets/signup.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faLock,
+  faAddressCard,
+  faUnlockKeyhole,
+  faImage,
+  faSquarePhone,
+  faGear,
+} from "@fortawesome/free-solid-svg-icons";
+import lottie from "lottie-web/build/player/lottie_light";
+import terraCornerLogin from "../assets/static/terraCornerLogin.json";
 
 const cookies = new Cookies();
 
@@ -15,8 +26,16 @@ const initialState = {
 };
 
 const Auth = () => {
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
+
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: document.querySelector("#auth__form-animation"),
+      animationData: terraCornerLogin,
+    });
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,27 +43,33 @@ const Auth = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { fullname, username, password, phoneNumber, avatarURL } = form;
-    const URL = "https://sore-teal-eagle-sari.cyclic.cloud/auth";
-    const {
-      data: { token, userId, hashedPassword, fullName },
-    } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
-      username,
-      password,
-      fullname: form.fullName,
-      phoneNumber,
-      avatarURL,
-    });
-    cookies.set("token", token);
-    cookies.set("username", username);
-    cookies.set("fullName", fullname);
-    cookies.set("userId", userId);
-    if (isSignup) {
-      cookies.set("phoneNumber", phoneNumber);
-      cookies.set("avatarURL", avatarURL);
-      cookies.set("hashedPassword", hashedPassword);
+    setLoading(true);
+    try {
+      const { fullname, username, password, phoneNumber, avatarURL } = form;
+      const URL = "https://sore-teal-eagle-sari.cyclic.cloud/auth";
+      const {
+        data: { token, userId, hashedPassword, fullName },
+      } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
+        username,
+        password,
+        fullname: form.fullName,
+        phoneNumber,
+        avatarURL,
+      });
+      cookies.set("token", token);
+      cookies.set("username", username);
+      cookies.set("fullName", fullname);
+      cookies.set("userId", userId);
+      if (isSignup) {
+        cookies.set("phoneNumber", phoneNumber);
+        cookies.set("avatarURL", avatarURL);
+        cookies.set("hashedPassword", hashedPassword);
+      }
+      setLoading(false);
+      window.location.reload();
+    } catch (error) {
+      setLoading(false);
     }
-    window.location.reload();
   };
 
   const switchMode = () => {
@@ -52,95 +77,119 @@ const Auth = () => {
   };
 
   return (
-    <div className="auth__form-container">
-      <div className="auth__form-container_fields">
-        <div className="auth__form-container_fields-content">
-          <p>{isSignup ? "Sign Up" : "Sign In"}</p>
-          <form onSubmit={handleSubmit}>
-            {isSignup && (
-              <div className="auth__form-container_fields-content_input">
-                <label htmlFor="fullName">Full Name</label>
-                <input
-                  name="fullName"
-                  type="text"
-                  placeholder="Full Name"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            )}
-            <div className="auth__form-container_fields-content_input">
-              <label htmlFor="username">Username</label>
-              <input
-                name="username"
-                type="text"
-                placeholder="Username"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            {isSignup && (
-              <div className="auth__form-container_fields-content_input">
-                <label htmlFor="phoneNumber">Phone Number</label>
-                <input
-                  name="phoneNumber"
-                  type="text"
-                  placeholder="Phone Number"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            )}
-            {isSignup && (
-              <div className="auth__form-container_fields-content_input">
-                <label htmlFor="avatarURL">Avatar URL</label>
-                <input
-                  name="avatarURL"
-                  type="text"
-                  placeholder="Avatar URL"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            )}
-            <div className="auth__form-container_fields-content_input">
-              <label htmlFor="password">Password</label>
-              <input
-                name="password"
-                type="password"
-                placeholder="Password"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            {isSignup && (
-              <div className="auth__form-container_fields-content_input">
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Confirm Password"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            )}
-            <div className="auth__form-container_fields-content_button">
-              <button>{isSignup ? "Sign Up" : "Sign In"}</button>
-            </div>
-          </form>
-          <div className="auth__form-container_fields-account">
-            <p>
-              {isSignup ? "Already have an account?" : "Don't have an account?"}
-              <span onClick={switchMode}>
-                {isSignup ? "Sign In" : "Sign Up"}
-              </span>
+    <div className="auth__form-outer-container">
+      <div className="auth__form-center-container">
+        <div className="auth__form-left-div">
+          <div className="auth__form-left-div-input-container">
+            <h1 className="auth__form-header">
+              {isSignup
+                ? "Begin Your Adventure 🗺️"
+                : "Get Started by Logging In 🚀"}
+            </h1>
+            <p className="auth__form-subheader">
+              {isSignup
+                ? "Start your adventure with us by signing up for an account."
+                : "Begin your journey by logging into your account."}
             </p>
+            <form onSubmit={handleSubmit}>
+              {isSignup && (
+                <div className="auth__form-container_fields-content_input">
+                  <input
+                    name="fullName"
+                    type="text"
+                    placeholder="Full Name"
+                    onChange={handleChange}
+                    required
+                  />
+                  <FontAwesomeIcon className="icon" icon={faAddressCard} />
+                </div>
+              )}
+              <div className="auth__form-container_fields-content_input">
+                <input
+                  name="username"
+                  type="text"
+                  placeholder="Username"
+                  onChange={handleChange}
+                  required
+                />
+                <FontAwesomeIcon className="icon" icon={faUser} />
+              </div>
+              {isSignup && (
+                <div className="auth__form-container_fields-content_input">
+                  <input
+                    name="phoneNumber"
+                    type="text"
+                    placeholder="Phone Number"
+                    onChange={handleChange}
+                    required
+                  />
+                  <FontAwesomeIcon className="icon" icon={faSquarePhone} />
+                </div>
+              )}
+              {isSignup && (
+                <div className="auth__form-container_fields-content_input">
+                  <input
+                    name="avatarURL"
+                    type="text"
+                    placeholder="Avatar URL"
+                    onChange={handleChange}
+                    required
+                  />
+                  <FontAwesomeIcon className="icon" icon={faImage} />
+                </div>
+              )}
+              <div className="auth__form-container_fields-content_input">
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  required
+                />
+                <FontAwesomeIcon className="icon" icon={faLock} />
+              </div>
+              {isSignup && (
+                <div className="auth__form-container_fields-content_input">
+                  <input
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Confirm Password"
+                    onChange={handleChange}
+                    required
+                  />
+                  <FontAwesomeIcon className="icon" icon={faUnlockKeyhole} />
+                </div>
+              )}
+              <div className="auth__form-container_fields-content_button">
+                <button>
+                  {loading ? (
+                    <FontAwesomeIcon
+                      icon={faGear}
+                      size="lg"
+                      spin
+                      style={{ color: "#ffffff" }}
+                    />
+                  ) : isSignup ? (
+                    "Sign Up"
+                  ) : (
+                    "Sign In"
+                  )}
+                </button>
+              </div>
+            </form>
+            <div className="auth__form-container_fields-account">
+              <p>
+                {isSignup
+                  ? "Already have an account? "
+                  : "Don't have an account? "}
+                <span onClick={switchMode}>
+                  {isSignup ? "Sign In" : "Sign Up"}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="auth__form-container_image">
-        <img src={signinImage} alt="sign in" />
+        <div className="auth__form-right-div" id="auth__form-animation"></div>
       </div>
     </div>
   );
