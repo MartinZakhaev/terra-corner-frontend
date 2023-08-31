@@ -32,10 +32,9 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  // if (!authToken) return <Auth />;
-
   return (
     <>
+      <Toaster />
       {authToken ? (
         <div className="app__wrapper">
           <Chat client={client} theme="team dark">
