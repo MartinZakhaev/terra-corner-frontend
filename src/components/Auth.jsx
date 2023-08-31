@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import lottie from "lottie-web/build/player/lottie_light";
 import terraCornerLogin from "../assets/static/terraCornerLogin.json";
+import toast from "react-hot-toast";
 
 const cookies = new Cookies();
 
@@ -69,6 +70,9 @@ const Auth = () => {
       window.location.reload();
     } catch (error) {
       setLoading(false);
+      toast.error(
+        "Oops! It seems like the username or password is not correct. Give it another shot!"
+      );
     }
   };
 
