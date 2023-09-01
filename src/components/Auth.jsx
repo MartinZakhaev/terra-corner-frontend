@@ -45,7 +45,7 @@ const Auth = () => {
         if (!error && result && result.event === "success") {
           const imageUrl = result.info.secure_url;
           setUserImage(imageUrl);
-          toast.success("Avatar image uploaded successfully!");
+          toast.success("Avatar image uploaded successfully!!");
         } else if (error) {
           toast.error("Error uploading avatar image. Please try again.");
         }
