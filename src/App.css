@@ -3,6 +3,52 @@
   --primary-color-alpha: #005fff1a;
 }
 
+#channel-list::-webkit-scrollbar,
+#message-list::-webkit-scrollbar {
+  width: 0;
+  transition: width 0.2s;
+}
+
+#channel-list:hover::-webkit-scrollbar,
+#message-list:hover::-webkit-scrollbar {
+  width: 0.4vw;
+}
+
+#channel-list::-webkit-scrollbar-thumb,
+#message-list::-webkit-scrollbar-thumb {
+  background-color: #7248dc;
+  border-radius: 100vw;
+}
+
+#channel-list::-webkit-scrollbar-track,
+#message-list::-webkit-scrollbar-track {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2),
+    var(--primary-color)
+  );
+  border-radius: 100vw;
+}
+
+.str-chat__list::-webkit-scrollbar,
+#user-list::-webkit-scrollbar {
+  width: 0.4vw;
+  transition: width 0.2s;
+}
+
+.str-chat__list::-webkit-scrollbar-thumb,
+#user-list::-webkit-scrollbar-thumb {
+  background-color: #4e1ad3;
+  border-radius: 100vw;
+}
+
+.str-chat__list::-webkit-scrollbar-track,
+#user-list::-webkit-scrollbar-track {
+  background-color: #b4b7bb;
+  border-radius: 100vw;
+}
+
 .str-chat {
   --str-chat__channel-list-background-color: transparent;
 }
@@ -16,6 +62,12 @@ body {
 
 #root {
   height: 100%;
+}
+
+.confirmation__pop-up {
+  position: fixed !important;
+  z-index: 999 !important;
+  background-color: red;
 }
 
 .auth__form-container {
@@ -159,7 +211,7 @@ body {
 .auth__form-container_fields-content_input input {
   padding: 0.55rem 2rem;
   border: 1px solid rgb(184, 196, 194);
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 14px;
   outline: none;
   transition: all 150ms ease-in-out 0s;
@@ -199,7 +251,7 @@ body {
 
 .auth__form-container_fields-content_button button {
   margin: 0.3rem;
-  border-radius: 4px;
+  border-radius: 8px;
   background: var(--primary-color);
   border: 1px solid var(--primary-color);
   color: #fff;
@@ -331,6 +383,20 @@ body {
   margin-left: 20px;
   margin-right: 20px;
   padding-bottom: 20px;
+}
+
+.channel-empty__text-offset {
+  margin-top: -100px;
+}
+
+.channel-empty__content-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
 .channel-empty__avatars {
@@ -673,6 +739,7 @@ body {
   height: 62px;
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
   padding-right: 20px;
+  z-index: 2;
 }
 
 .create-channel__header p {
@@ -688,12 +755,44 @@ body {
   cursor: pointer;
 }
 
+.channel-information__wrapper {
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+  color: #858688;
+}
+
+.channel-information {
+  display: flex;
+  align-items: center;
+}
+
+.channel-information__icon {
+  margin: 0px 20px;
+  max-width: 20px;
+}
+
 .channel-name-input__wrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
-  height: 169px;
   padding-left: 20px;
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.channel-name-input__wrapper .icon {
+  position: absolute;
+  left: 1.5rem;
+  top: 4.15rem;
+  padding: 9px 8px;
+  color: #aaa;
+  transition: 0.3s;
+}
+
+.channel-name-input__wrapper input:focus + .icon {
+  color: var(--primary-color);
+  transition: 0.3s;
 }
 
 .channel-name-input__wrapper p {
@@ -706,15 +805,15 @@ body {
 
 .channel-name-input__wrapper input {
   font-family: Helvetica Neue, sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   color: rgba(0, 0, 0, 0.5);
-  height: 50px;
-  width: 540px;
+  height: 2.35vw;
+  width: 98%;
   background: #f7f6f8;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(184, 196, 194);
   box-sizing: border-box;
   border-radius: 8px;
-  padding-left: 16px;
+  padding-left: 40px;
 }
 
 .channel-name-input__wrapper input:focus {
@@ -755,11 +854,19 @@ body {
   height: 100%;
 }
 
+.user-list__scrollable {
+  overflow: auto;
+}
+
 .user-list__header {
+  background-color: #fff;
   display: flex;
   align-items: center;
   margin: 0px 20px;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .user-list__header p {
@@ -771,13 +878,19 @@ body {
 }
 
 .user-list__header p:first-child {
-  flex: 2;
+  flex: 1;
 }
 
 .user-list__header p:nth-child(2) {
-  flex: 0.5;
+  flex: 1;
+  text-align: center;
+  /* margin: 0px 20px; */
+}
+
+.user-list__header p:nth-child(3) {
+  flex: 1;
   text-align: right;
-  margin: 0px 20px;
+  /* margin: 0px 20px; */
 }
 
 .user-list__message {
@@ -806,7 +919,7 @@ body {
 .user-item__name-wrapper {
   display: flex;
   align-items: center;
-  flex: 2;
+  flex: 1;
   text-align: left;
 }
 
@@ -820,15 +933,21 @@ body {
 
 .user-item__name {
   font-weight: 500;
+  margin-left: 10px;
 }
 
 .user-item__last-active {
   font-weight: 400;
   width: 30%;
-  flex: 0.5;
-  text-align: right;
-
+  flex: 1;
+  text-align: center;
   margin: 0px 20px;
+}
+
+.user-item__invite-active {
+  flex: 1;
+  text-align: end;
+  padding-right: 5px;
 }
 
 .user-item__invite-empty {
@@ -867,45 +986,6 @@ body {
 
 .edit-channel__header svg {
   cursor: pointer;
-}
-
-.channel-name-input__wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 169px;
-  padding-left: 20px;
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
-}
-
-.channel-name-input__wrapper p {
-  font-family: Helvetica Neue, sans-serif;
-  font-size: 16px;
-  line-height: 120%;
-  color: #2c2c30;
-  margin-top: 30px;
-}
-
-.channel-name-input__wrapper input {
-  font-family: Helvetica Neue, sans-serif;
-  font-size: 18px;
-  color: rgba(0, 0, 0);
-  height: 50px;
-  width: 90%;
-  background: #f7f6f8;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding-left: 16px;
-}
-
-.channel-name-input__wrapper input:focus {
-  border: 1px solid var(--primary-color);
-  outline: none;
-}
-
-.channel-name-input__wrapper input::placeholder {
-  font-weight: 300;
-  color: rgba(0, 0, 0, 0.5);
 }
 
 .edit-channel__button-wrapper {
@@ -1024,6 +1104,12 @@ body {
   color: #858688;
 }
 
+.channel-list__scrollable {
+  min-height: 250px;
+  max-height: 250px;
+  overflow: auto;
+}
+
 .team-channel-list {
   width: 100%;
   display: flex;
@@ -1040,10 +1126,14 @@ body {
 }
 
 .team-channel-list__header {
+  background-color: var(--primary-color);
   padding: 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 9;
 }
 
 .team-channel-list__header svg {

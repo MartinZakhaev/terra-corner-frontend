@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/jest-dom": "^5.17.0",
@@ -18,6 +19,7 @@
     "react-scripts": "5.0.1",
     "stream-chat": "^8.11.0",
     "stream-chat-react": "^10.9.0",
+    "sweetalert2": "^11.7.27",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, useChatContext } from "stream-chat-react";
-import { InviteIcon } from "../assets";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCircle } from "@fortawesome/free-regular-svg-icons";
 
 const ListContainer = ({ children }) => {
   return (
-    <div className="user-list__container">
+    <div className="user-list__container user-list__scrollable" id="user-list">
       <div className="user-list__header">
         <p>User</p>
+        <p>Last Active</p>
         <p>Invite</p>
       </div>
       {children}
@@ -28,6 +31,22 @@ const UserItem = ({ user, setSelectedUsers }) => {
     setSelected((prevSelected) => !prevSelected);
   };
 
+  const formatDate = (date) => {
+    const dateTimeString = date;
+    const dateTime = new Date(dateTimeString);
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      timeZoneName: "short",
+    };
+    const formattedDateTime = dateTime.toLocaleDateString("en-US", options);
+    return formattedDateTime;
+  };
+
   return (
     <div className="user-item__wrapper" onClick={handleSelect}>
       <div className="user-item__name-wrapper">
@@ -38,13 +57,26 @@ const UserItem = ({ user, setSelectedUsers }) => {
         />
         <p className="user-item__name">{user.fullName || user.name}</p>
       </div>
-      {/* <div className="user-list__column--invite"> */}
-        {selected ? (
-          <InviteIcon />
-        ) : (
-          <div className="user-item__invite-empty" />
-        )}
-      {/* </div> */}
+      <div className="user-item__last-active">
+        <p>{formatDate(user.last_active)}</p>
+      </div>
+      {selected ? (
+        <div className="user-item__invite-active">
+          <FontAwesomeIcon
+            icon={faCircleCheck}
+            size="lg"
+            style={{ color: "#4f1ad3" }}
+          />
+        </div>
+      ) : (
+        <div className="user-item__invite-active">
+          <FontAwesomeIcon
+            icon={faCircle}
+            size="lg"
+            style={{ color: "#4f1ad3" }}
+          />
+        </div>
+      )}
     </div>
   );
 };
@@ -107,14 +139,16 @@ const UserList = ({ setSelectedUsers }) => {
       {loading ? (
         <div className="user-list__message">Loading users ...</div>
       ) : (
-        users?.map((user, i) => (
-          <UserItem
-            index={i}
-            key={user.id}
-            user={user}
-            setSelectedUsers={setSelectedUsers}
-          />
-        ))
+        users
+          ?.filter((user) => user.id !== "terraz")
+          .map((user, i) => (
+            <UserItem
+              index={i}
+              key={user.id}
+              user={user}
+              setSelectedUsers={setSelectedUsers}
+            />
+          ))
       )}
     </ListContainer>
   );

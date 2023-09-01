@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useChatContext } from "stream-chat-react";
 import { UserList } from "./";
 import { CloseCreateChannel } from "../assets";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear, faUsers } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
 
 const ChannelNameInput = ({ channelName = "", setChannelName }) => {
   const handleChange = (e) => {
@@ -15,8 +18,9 @@ const ChannelNameInput = ({ channelName = "", setChannelName }) => {
       <input
         value={channelName}
         onChange={handleChange}
-        placeholder="channel-name"
+        placeholder="Channel-Name"
       />
+      <FontAwesomeIcon className="icon" icon={faUsers} />
       <p>Add Members</p>
     </div>
   );
@@ -26,9 +30,11 @@ const CreateChannel = ({ createType, setIsCreating }) => {
   const { client, setActiveChannel } = useChatContext();
   const [selectedUsers, setSelectedUsers] = useState([client.userID || ""]);
   const [channelName, setChannelName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const createChannel = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const newChannel = await client.channel(createType, channelName, {
         name: channelName,
@@ -39,8 +45,13 @@ const CreateChannel = ({ createType, setIsCreating }) => {
       setIsCreating(false);
       setSelectedUsers([client.userID]);
       setActiveChannel(newChannel);
+      setLoading(false);
+      toast.success("Voila! Your channel is created successfully.");
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      toast.error(
+        "Uh-oh! We encountered an issue. Please make sure there are no spaces in your input."
+      );
     }
   };
 
@@ -63,7 +74,18 @@ const CreateChannel = ({ createType, setIsCreating }) => {
       <UserList setSelectedUsers={setSelectedUsers} />
       <div className="create-channel__button-wrapper" onClick={createChannel}>
         <p>
-          {createType === "team" ? "Create Channel" : "Create Message Group"}
+          {loading ? (
+            <FontAwesomeIcon
+              icon={faGear}
+              size="lg"
+              spin
+              style={{ color: "#ffffff" }}
+            />
+          ) : createType === "team" ? (
+            "Create Channel"
+          ) : (
+            "Create Message Group"
+          )}
         </p>
       </div>
     </div>

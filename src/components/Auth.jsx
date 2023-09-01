@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,11 +27,31 @@ const initialState = {
 };
 
 const Auth = () => {
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
+  const [userImage, setUserImage] = useState("");
 
   useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+        uploadPreset: process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET,
+      },
+      function (error, result) {
+        if (!error && result && result.event === "success") {
+          const imageUrl = result.info.secure_url;
+          setUserImage(imageUrl);
+          toast.success("Avatar image uploaded successfully!");
+        } else if (error) {
+          toast.error("Error uploading avatar image. Please try again.");
+        }
+      }
+    );
+
     lottie.loadAnimation({
       container: document.querySelector("#auth__form-animation"),
       animationData: terraCornerLogin,
@@ -63,7 +83,7 @@ const Auth = () => {
       cookies.set("userId", userId);
       if (isSignup) {
         cookies.set("phoneNumber", phoneNumber);
-        cookies.set("avatarURL", avatarURL);
+        cookies.set("avatarURL", userImage);
         cookies.set("hashedPassword", hashedPassword);
       }
       setLoading(false);
@@ -135,9 +155,10 @@ const Auth = () => {
                   <input
                     name="avatarURL"
                     type="text"
-                    placeholder="Avatar URL"
-                    onChange={handleChange}
+                    placeholder="Avatar"
+                    onClick={() => widgetRef.current.open()}
                     required
+                    value={userImage}
                   />
                   <FontAwesomeIcon className="icon" icon={faImage} />
                 </div>

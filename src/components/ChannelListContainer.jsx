@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChannelList, useChatContext } from "stream-chat-react";
 import Cookies from "universal-cookie";
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from "./";
-import HospitalIcon from "../assets/hospital.png";
-import LogoutIcon from "../assets/logout.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowRightFromBracket,
+  faDiceD6,
+} from "@fortawesome/free-solid-svg-icons";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import lottie from "lottie-web/build/player/lottie_light";
+import channelListEmptyState from "../assets/static/channelListEmptyState.json";
 
 const cookies = new Cookies();
 
@@ -11,12 +17,12 @@ const SideBar = ({ logout }) => (
   <div className="channel-list__sidebar">
     <div className="channel-list__sidebar__icon1">
       <div className="icon1__inner">
-        <img src={HospitalIcon} alt="Hospital" width={30} />
+        <FontAwesomeIcon icon={faDiceD6} />
       </div>
     </div>
     <div className="channel-list__sidebar__icon2">
       <div className="icon1__inner" onClick={logout}>
-        <img src={LogoutIcon} alt="Logout" width={30} />
+        <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </div>
     </div>
   </div>
@@ -34,6 +40,40 @@ const customChannelTeamFilter = (channels) => {
 
 const customChannelMessagingFilter = (channels) => {
   return channels.filter((channel) => channel.type === "messaging");
+};
+
+const EmptyState = () => {
+  useEffect(() => {
+    const container = document.getElementById("lottie-container");
+
+    const animationOptions = {
+      container: container,
+      animationData: channelListEmptyState,
+      loop: true,
+      autoplay: true,
+    };
+
+    const anim = lottie.loadAnimation(animationOptions);
+
+    return () => {
+      anim.destroy();
+    };
+  }, []);
+
+  return (
+    <div className="channel-empty__container">
+      <div
+        id="lottie-container"
+        style={{ width: "200px", height: "300px" }}
+      ></div>
+      {/* <p className="channel-empty__first">
+        This is the beginning of your chat history
+      </p>
+      <p className="channel-empty__second">
+        Send messages, attachments, links, emojis, and more!
+      </p> */}
+    </div>
+  );
 };
 
 const ChannelListContent = ({
@@ -65,18 +105,21 @@ const ChannelListContent = ({
         <CompanyHeader />
         <ChannelSearch setToggleContainer={setToggleContainer} />
         <ChannelList
+          // EmptyStateIndicator={() => <EmptyState />}
           filters={filters}
           channelRenderFilterFn={customChannelTeamFilter}
           List={(listProps) => (
-            <TeamChannelList
-              {...listProps}
-              type="team"
-              isCreating={isCreating}
-              setIsCreating={setIsCreating}
-              setCreateType={setCreateType}
-              setIsEditing={setIsEditing}
-              setToggleContainer={setToggleContainer}
-            />
+            <div className="channel-list__scrollable" id="channel-list">
+              <TeamChannelList
+                {...listProps}
+                type="team"
+                isCreating={isCreating}
+                setIsCreating={setIsCreating}
+                setCreateType={setCreateType}
+                setIsEditing={setIsEditing}
+                setToggleContainer={setToggleContainer}
+              />
+            </div>
           )}
           Preview={(previewProps) => (
             <TeamChannelPreview
@@ -89,18 +132,21 @@ const ChannelListContent = ({
           )}
         />
         <ChannelList
+          // EmptyStateIndicator={() => <EmptyState />}
           filters={filters}
           channelRenderFilterFn={customChannelMessagingFilter}
           List={(listProps) => (
-            <TeamChannelList
-              {...listProps}
-              type="messaging"
-              isCreating={isCreating}
-              setIsCreating={setIsCreating}
-              setCreateType={setCreateType}
-              setIsEditing={setIsEditing}
-              setToggleContainer={setToggleContainer}
-            />
+            <div className="channel-list__scrollable" id="message-list">
+              <TeamChannelList
+                {...listProps}
+                type="messaging"
+                isCreating={isCreating}
+                setIsCreating={setIsCreating}
+                setCreateType={setCreateType}
+                setIsEditing={setIsEditing}
+                setToggleContainer={setToggleContainer}
+              />
+            </div>
           )}
           Preview={(previewProps) => (
             <TeamChannelPreview
