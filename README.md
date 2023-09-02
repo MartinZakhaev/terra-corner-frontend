@@ -115,5 +115,5 @@ I would like to express my gratitude to the following individuals, organizations
 [linkedin-url]: https://www.linkedin.com/in/andika-wahyu-syaputra-42914b197/
 [React.Js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Node.Js]: https://img.shields.io/badge/NodeJs-20232A?logo=nodedotjs
+[Node.Js]: https://img.shields.io/badge/NodeJs-20232A?style=for-the-badge&logo=nodedotjs
 
