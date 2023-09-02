@@ -3,14 +3,11 @@ import { ChannelList, useChatContext } from "stream-chat-react";
 import Cookies from "universal-cookie";
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from "./";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRightFromBracket,
-  faDiceD6,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import teamMessageEmpty from "../assets/static/teamMessageEmpty.svg";
 import teamMessageEmpty1 from "../assets/static/teamMessageEmpty1.svg";
-import terraCornerLogo from "../assets/terraCornerLogo.png"
+import terraCornerLogo from "../assets/terraCornerLogo.png";
 
 const cookies = new Cookies();
 
@@ -18,7 +15,6 @@ const SideBar = ({ logout }) => (
   <div className="channel-list__sidebar">
     <div className="channel-list__sidebar__icon1">
       <div className="icon1__inner">
-        {/* <FontAwesomeIcon icon={faDiceD6} /> */}
         <img src={terraCornerLogo} alt="" width={30} />
       </div>
     </div>
@@ -160,7 +156,6 @@ const ChannelListContent = ({
             />
           )}
         />
-        <br />
         <br />
         <br />
         <br />

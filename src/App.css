@@ -1122,8 +1122,8 @@ body {
 }
 
 .channel-list__scrollable {
-  min-height: 250px;
-  max-height: 250px;
+  min-height: 270px;
+  max-height: 270px;
   overflow: auto;
 }
 
