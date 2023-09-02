@@ -53,6 +53,23 @@
   --str-chat__channel-list-background-color: transparent;
 }
 
+.copyright__container {
+  display: flex;
+  justify-content: flex-end; /* Horizontally align to the end */
+  align-items: flex-end;
+  margin: 0px 16px;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 10px;
+  line-height: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.66);
+  margin-bottom: 10px;
+}
+
+.copyright__container p {
+  margin: 0;
+}
+
 html,
 body {
   margin: 0;

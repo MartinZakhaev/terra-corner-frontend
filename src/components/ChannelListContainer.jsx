@@ -8,8 +8,9 @@ import {
   faDiceD6,
 } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import lottie from "lottie-web/build/player/lottie_light";
-import channelListEmptyState from "../assets/static/channelListEmptyState.json";
+import teamMessageEmpty from "../assets/static/teamMessageEmpty.svg";
+import teamMessageEmpty1 from "../assets/static/teamMessageEmpty1.svg";
+import terraCornerLogo from "../assets/terraCornerLogo.png"
 
 const cookies = new Cookies();
 
@@ -17,7 +18,8 @@ const SideBar = ({ logout }) => (
   <div className="channel-list__sidebar">
     <div className="channel-list__sidebar__icon1">
       <div className="icon1__inner">
-        <FontAwesomeIcon icon={faDiceD6} />
+        {/* <FontAwesomeIcon icon={faDiceD6} /> */}
+        <img src={terraCornerLogo} alt="" width={30} />
       </div>
     </div>
     <div className="channel-list__sidebar__icon2">
@@ -42,36 +44,36 @@ const customChannelMessagingFilter = (channels) => {
   return channels.filter((channel) => channel.type === "messaging");
 };
 
-const EmptyState = () => {
-  useEffect(() => {
-    const container = document.getElementById("lottie-container");
-
-    const animationOptions = {
-      container: container,
-      animationData: channelListEmptyState,
-      loop: true,
-      autoplay: true,
-    };
-
-    const anim = lottie.loadAnimation(animationOptions);
-
-    return () => {
-      anim.destroy();
-    };
-  }, []);
-
+const ChannelEmptyState = () => {
   return (
     <div className="channel-empty__container">
-      <div
-        id="lottie-container"
-        style={{ width: "200px", height: "300px" }}
-      ></div>
-      {/* <p className="channel-empty__first">
-        This is the beginning of your chat history
-      </p>
+      <img
+        src={teamMessageEmpty1}
+        alt="channel-list__empty-state"
+        width={200}
+      />
+      <p className="channel-empty__first">Create, Connect, Communicate</p>
       <p className="channel-empty__second">
-        Send messages, attachments, links, emojis, and more!
-      </p> */}
+        No channels yet? No problem! Create your own and connect with
+        like-minded individuals.
+      </p>
+    </div>
+  );
+};
+
+const DirectMessageEmptyState = () => {
+  return (
+    <div className="channel-empty__container">
+      <img
+        src={teamMessageEmpty}
+        alt="direct-message-list__empty-state"
+        width={200}
+      />
+      <p className="channel-empty__first">Create, Connect, Collaborate</p>
+      <p className="channel-empty__second">
+        No group chats yet? Create one and connect with your contacts.
+        Collaborate and communicate together.
+      </p>
     </div>
   );
 };
@@ -105,7 +107,7 @@ const ChannelListContent = ({
         <CompanyHeader />
         <ChannelSearch setToggleContainer={setToggleContainer} />
         <ChannelList
-          // EmptyStateIndicator={() => <EmptyState />}
+          EmptyStateIndicator={() => <ChannelEmptyState />}
           filters={filters}
           channelRenderFilterFn={customChannelTeamFilter}
           List={(listProps) => (
@@ -132,7 +134,7 @@ const ChannelListContent = ({
           )}
         />
         <ChannelList
-          // EmptyStateIndicator={() => <EmptyState />}
+          EmptyStateIndicator={() => <DirectMessageEmptyState />}
           filters={filters}
           channelRenderFilterFn={customChannelMessagingFilter}
           List={(listProps) => (
@@ -158,6 +160,13 @@ const ChannelListContent = ({
             />
           )}
         />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div className="copyright__container">
+          <p>&copy; 2023 Andika W. Syaputra. All rights reserved. | Terra</p>
+        </div>
       </div>
     </>
   );

@@ -37,7 +37,7 @@ const App = () => {
       <Toaster />
       {authToken ? (
         <div className="app__wrapper">
-          <Chat client={client} theme="team dark">
+          <Chat client={client} theme="team light">
             <ChannelListContainer
               isCreating={isCreating}
               setIsCreating={setIsCreating}
