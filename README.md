@@ -71,22 +71,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![image](https://github.com/MartinZakhaev/terra-corner-frontend/assets/78039794/9313d1f8-235c-4193-8293-3078dd36fd1f)
+![image](https://github.com/MartinZakhaev/terra-corner-frontend/assets/78039794/35b334d3-0811-46b2-911a-f2456d7df955)
+![image](https://github.com/MartinZakhaev/terra-corner-frontend/assets/78039794/c30fe5ec-6e2b-42da-bc87-06c49ce057e2)
+![image](https://github.com/MartinZakhaev/terra-corner-frontend/assets/78039794/ac3f17b7-50a1-4728-bc03-ff2fa9eff1b7)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+Welcome to Terra Corner, a web-based chatting application that aims to connect users through channels and direct messages (DMs). This project focuses on creating an interactive and user-friendly platform where users can communicate, collaborate, and build communities. With Terra Corner, you can create channels, invite other users, and have private conversations with ease.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 
