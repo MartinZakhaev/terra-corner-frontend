@@ -10,20 +10,13 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://github.com/MartinZakhaev/terra-corner-frontend/assets/78039794/4369651d-ce8f-42ac-bbfb-9562a8b05b8d" alt="Logo" width="80" height="80">
+    <img src="https://github.com/MartinZakhaev/terra-corner-frontend/assets/78039794/608f6802-bdeb-454c-a97a-a6a9fbe2ea0b" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">TERRA CORNER</h3>
