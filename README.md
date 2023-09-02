@@ -67,7 +67,8 @@ Welcome to Terra Corner, a web-based chatting application that aims to connect u
 
 ### Built With
 
-* [![React][React.js]][React-url]
+* [![React.Js][React.Js]][React-url]
+* [![Node.Js][Node.Js]][React-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -112,5 +113,7 @@ I would like to express my gratitude to the following individuals, organizations
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/andika-wahyu-syaputra-42914b197/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React.Js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
+[Node.Js]: https://img.shields.io/badge/NodeJs-20232A?logo=nodedotjs
+
