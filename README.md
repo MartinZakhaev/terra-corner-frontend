@@ -23,8 +23,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    ![terraCornerLogo](https://github.com/MartinZakhaev/terra-corner-frontend/assets/78039794/4369651d-ce8f-42ac-bbfb-9562a8b05b8d)
   </a>
+    ![terraCornerLogo](https://github.com/MartinZakhaev/terra-corner-frontend/assets/78039794/4369651d-ce8f-42ac-bbfb-9562a8b05b8d)
 
   <h3 align="center">TERRA CORNER</h3>
 
