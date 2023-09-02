@@ -70,6 +70,9 @@ Welcome to Terra Corner, a web-based chatting application that aims to connect u
 * [![React.Js][React.Js]][React-url]
 * [![Node.Js][Node.Js]][Node-url]
 * [![Express][Express.Js]][Express-url]
+* [![HTML][HTML5]][HTML-url]
+* [![CSS][CSS3]][CSS-url]
+* [![JS][JavaScript]][JS-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -123,4 +126,10 @@ I would like to express my gratitude to the following individuals, organizations
 [Node-url]: https://nodejs.org/en
 [Express.Js]: https://img.shields.io/badge/Express-20232A?style=for-the-badge&logo=express
 [Express-url]: https://expressjs.com/
+[HTML5]: https://img.shields.io/badge/HTML-20232A?style=for-the-badge&logo=HTML5
+[HTML-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[CSS3]: https://img.shields.io/badge/CSS-20232A?style=for-the-badge&logo=css3
+[CSS-url]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[JavaScript]: https://img.shields.io/badge/JavaScript-20232A?style=for-the-badge&logo=javascript
+[JS-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
