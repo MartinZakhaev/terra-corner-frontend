@@ -103,6 +103,9 @@ I would like to express my gratitude to the following individuals, organizations
 * [Choose an Open Source License](https://choosealicense.com)
 * [Font Awesome](https://fontawesome.com)
 * [React Js](https://react.dev/)
+* [Node Js]( https://nodejs.org/en)
+* [Express Js](https://expressjs.com/)
+* [React Hot Toast](https://react-hot-toast.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
