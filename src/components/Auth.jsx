@@ -67,7 +67,7 @@ const Auth = () => {
     setLoading(true);
     try {
       const { fullname, username, password, phoneNumber, avatarURL } = form;
-      const URL = "https://sore-teal-eagle-sari.cyclic.cloud/auth";
+      const URL = process.env.REACT_APP_API_URL;
       const {
         data: { token, userId, hashedPassword, fullName },
       } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
